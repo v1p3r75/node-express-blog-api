@@ -1,8 +1,11 @@
 {
+
   "scripts": {
     "start": "node ./src/server.ts",
     "dev": "nodemon ./src/server.ts",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "db:create": "sequelize-cli db:create",
+    "migrate": "sequelize-cli db:migrate"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

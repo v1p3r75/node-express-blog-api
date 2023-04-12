@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Router } from "express";
 import BlogController from "../controllers/BlogController";
+import UserController from "../controllers/UserController";
 
 const AppRouter = Router();
 export const ApiRouter = Router();
@@ -13,7 +14,7 @@ AppRouter.get('/', (req : Request, res : Response) => {
 // Controller Routes
 
 AppRouter.use('/blogs', BlogController);
-
+AppRouter.use('/users', UserController);
 
 
 ApiRouter.use('/api/v1', AppRouter);
