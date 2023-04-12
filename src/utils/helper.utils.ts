@@ -10,7 +10,8 @@ import { Lang } from "../types/Generals.type";
  * @returns {string} - The value of the environment variable, or the defaultValue if not set.
  */
 export const getEnv = (key: string, defaultValue: string | number = '') => {
-    return process.env?.[key] ?? String(defaultValue);
+    
+    return process.env?.[key] ?? defaultValue.toString();
 }
 
 /**
