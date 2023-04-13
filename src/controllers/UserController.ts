@@ -1,12 +1,15 @@
 import { Router, Request, Response } from "express";
+import UserService from "../services/user.service";
 
 
 const UserController = Router();
 
-UserController.get('/', function(req: Request, res: Response){
+const user = new UserService();
 
-    return res.json({
-        message: 'Hello World!'
+UserController.get('/', async (req: Request, res: Response) => {
+
+    await user.getUser(1).then(data => {
+        console.log(data); 
     })
 })
 
