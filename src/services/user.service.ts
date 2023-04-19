@@ -1,11 +1,11 @@
 import {User} from "../database/models/user";
+import { ModelCtor } from "sequelize-typescript/dist/model/model/model";
+import BaseService from "./base.service";
 
-class UserService {
+class UserService extends BaseService{
 
-    async getUser(id : number) {
-
-        return await User.findAll()
-    }
+    protected model = User;
+    
 }
 
 export default UserService;

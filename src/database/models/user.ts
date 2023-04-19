@@ -1,14 +1,14 @@
 import { Model, Association, DataTypes, Sequelize } from 'sequelize'
-        export class User extends Model {
+export class User extends Model {
         public id!: number
-public username!: string
-public phone!: string
-public email!: string
-public password!: string
-public admin!: boolean
-public readonly createdAt?: Date
-public readonly updatedAt?: Date | null
-public readonly deleteAt?: Date | null
+        public username!: string
+        public phone!: string
+        public email!: string
+        public password!: string
+        public admin!: boolean
+        public readonly createdAt?: Date
+        public readonly updatedAt?: Date | null
+        public readonly deleteAt?: Date | null
         public static _init = (sequelize: Sequelize): void => {
             User.init({
             id: {

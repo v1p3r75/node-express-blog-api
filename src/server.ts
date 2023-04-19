@@ -4,7 +4,7 @@ import { getEnv } from "./utils/helper.utils";
 require("dotenv").config();
 
 
-app.listen(getEnv('PORT', 3000), (req : Request, res : Response) => {
+app.listen(getEnv('PORT', 3000), () => {
    
    console.info(`App running on ${getEnv('HOSTNAME', 'localhost')}:${getEnv('PORT', 3000)}`)
 });
