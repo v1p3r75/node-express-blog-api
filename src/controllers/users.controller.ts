@@ -8,7 +8,7 @@ const user = new UserService();
 
 UserController.get('/', async (req: Request, res: Response) => {
 
-    return user.getAll();
+    // return user.getAll();
 })
 
 export default UserController;

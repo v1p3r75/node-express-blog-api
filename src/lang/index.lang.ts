@@ -1,4 +1,4 @@
-import { LangType } from "../types/Generals.type";
+import { LangType } from "../types/generals.type";
 
 export const lang : LangType= {
     

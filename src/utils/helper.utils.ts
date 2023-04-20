@@ -1,5 +1,5 @@
 import { lang } from "../lang/index.lang";
-import { Lang } from "../types/Generals.type";
+import { Lang } from "../types/generals.type";
 
 /**
  * Retrieves the value of an environment variable based on the provided key.
