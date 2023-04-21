@@ -1,21 +1,30 @@
-import { Model, ModelCtor } from "sequelize-typescript"
+import { Model, ModelStatic } from "sequelize"
 import {User} from "../database/models/user";
 
 
 class BaseService {
 
-    protected model = User
+    protected model ?: ModelStatic<M>
+
+    // constructor() {
+    //     if (!this.model) throw Error('You must set a protected model attributes for service class.')
+    // }
 
     public async getAll() {
-        // const model = new this.model();
-        // this.model && await model.create({
-        //     'userame' : 'Kali'
-        // }).then((result) => {
-        //     console.log(result)
-        // }).catch((err) => {
-        //     console.error(err)
-        // });
+
+        const result = await this.model!.findAll().then(
+            (data) => {
+                return data
+            }
+        )
+
+        return result
     }
+
+    public async create(data) {
+
+        const result = await this.model!.create()
+    } 
 }
 
 export default BaseService;
