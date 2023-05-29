@@ -1,21 +1,14 @@
-// import {User} from "../database/models/user";
+import BaseService from "./base.service";
 
-// class UserService {
+class UserService extends BaseService {
 
-//     constructor(private model = User) {}
+    public async getAll(columns? : string[]){
 
-//     static getInstance() { return this.model }
+        const results =  await this.db.user.findMany()
 
-//     public async getAll() {
+        return results
+    }
 
-//         return await this.model.findAll();
-//     }
+}
 
-//     public async create(data = {name : '', email : '', password :''}) {
-
-//         return await this.model.create(data);
-//     }
-    
-// }
-
-// export default UserService;
+export default UserService;

@@ -1,17 +1,15 @@
 import { Router, Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import UserService from "../services/user.service";
 
 const UserController = Router();
 
-// const user = new UserService();
-
-const prisma = new PrismaClient();
+const model = new UserService();
 
 UserController.get('/', async (req: Request, res: Response) => {
 
-    const users = await prisma.user.findMany();
+    const users = await model.getAll();
 
-    return res.status(200).json(users);
+    return res.status(200).json({status: true, message: 'Succefful', data: users});
 })
 
 UserController.post('/register', async (req: Request, res: Response) => {
