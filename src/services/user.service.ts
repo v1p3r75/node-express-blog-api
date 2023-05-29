@@ -1,10 +1,20 @@
 import {User} from "../database/models/user";
-import { ModelCtor } from "sequelize-typescript/dist/model/model/model";
-import BaseService from "./base.service";
 
-class UserService extends BaseService{
+class UserService {
 
-    protected model = User;
+    constructor(private model = User) {}
+
+    static getInstance() { return this.model }
+
+    public async getAll() {
+
+        return await this.model.findAll();
+    }
+
+    public async create(data = {name : '', email : '', password :''}) {
+
+        return await this.model.create(data);
+    }
     
 }
 

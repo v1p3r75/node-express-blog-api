@@ -1,30 +1,30 @@
-import { Model, ModelStatic } from "sequelize"
-import {User} from "../database/models/user";
+// import { Model, ModelStatic } from "sequelize"
+// import {User} from "../database/models/user";
 
 
-class BaseService {
+// class BaseService {
 
-    protected model ?: ModelStatic<M>
+//     protected model ?: ModelStatic<M>
 
-    // constructor() {
-    //     if (!this.model) throw Error('You must set a protected model attributes for service class.')
-    // }
+//     // constructor() {
+//     //     if (!this.model) throw Error('You must set a protected model attributes for service class.')
+//     // }
 
-    public async getAll() {
+//     public async getAll() {
 
-        const result = await this.model!.findAll().then(
-            (data) => {
-                return data
-            }
-        )
+//         const result = await this.model!.findAll().then(
+//             (data) => {
+//                 return data
+//             }
+//         )
 
-        return result
-    }
+//         return result
+//     }
 
-    public async create(data) {
+//     public async create(data) {
 
-        const result = await this.model!.create()
-    } 
-}
+//         const result = await this.model!.create()
+//     } 
+// }
 
-export default BaseService;
+// export default BaseService;

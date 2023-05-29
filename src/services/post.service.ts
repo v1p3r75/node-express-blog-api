@@ -1,7 +1,6 @@
 import { Post } from "../database/models/post";
-import BaseService from "./base.service";
 
-class PostService extends BaseService {
+class PostService  {
 
     protected model = Post
 }
