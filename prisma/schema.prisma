@@ -7,27 +7,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model posts {
+model Post {
   id        Int       @id @default(autoincrement())
   title     String?   @db.VarChar(255)
   content   String?   @db.Text
-  createdAt DateTime  @db.DateTime(0)
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  comments  Comment[]
+  createdAt DateTime? @db.DateTime(0)
   updatedAt DateTime? @db.DateTime(0)
   deletedAt DateTime? @db.DateTime(0)
 }
 
-model sequelizemeta {
-  name String @id @unique(map: "name") @db.VarChar(255)
-}
-
-model users {
+model User {
   id        Int       @id @default(autoincrement())
-  username  String?   @db.VarChar(50)
+  username  String   @db.VarChar(50)
   phone     String?   @db.VarChar(10)
-  email     String?   @db.VarChar(255)
-  password  String?   @db.VarChar(255)
-  admin     Boolean?
-  createdAt DateTime  @db.DateTime(0)
+  email     String   @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  admin     Boolean?  @default(false)
+  createdAt DateTime?  @db.DateTime(0)
   updatedAt DateTime? @db.DateTime(0)
   deletedAt DateTime? @db.DateTime(0)
+  Post      Post[]
+  Comment   Comment[]
+}
+
+model Comment {
+  id      Int     @id @default(autoincrement())
+  content String? @db.VarChar(255)
+  post    Post    @relation(fields: [postId], references: [id])
+  postId  Int
+  userId  Int
+  user    User    @relation(fields: [userId], references: [id])
 }
