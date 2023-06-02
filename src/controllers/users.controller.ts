@@ -17,13 +17,13 @@ UserController.get('/', async (req: Request, res: Response) => {
 
 UserController.post('/register', validate(createUser), async (req: Request, res: Response) => {
 
-    const password = bcrypt(req.body.password)
+    const password = bcrypt.hash(req.body.password, 10);
 
     const data = {...req.body, password}
 
     const result = await model.create(req.body);
 
-    return res.status(201).json(result);
+    return res.status(201).json({status: true, message: 'User created succefully', data: result});
 });
 
 export default UserController;

@@ -13,6 +13,8 @@ class UserService extends BaseService {
     public async create(data: any) {
 
         const results = await this.db.user.create({ data: data })
+
+        return results;
     }
 
 }
