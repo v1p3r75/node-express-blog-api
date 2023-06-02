@@ -2,16 +2,17 @@ import BaseService from "./base.service";
 
 class UserService extends BaseService {
 
-    public async getAll(columns? : string[]){
+    public async getAll(columns?: string[]) {
 
-        const results =  await this.db.user.findMany()
+        const results = await this.db.user.findMany()
 
-        return results
+        return results;
+
     }
 
-    public async create(data : any) {
+    public async create(data: any) {
 
-        const results = await this.db.user.create({data : data})
+        const results = await this.db.user.create({ data: data })
     }
 
 }

@@ -9,7 +9,7 @@ export const validate = (schema: ObjectSchema) => (req: Request, res: Response, 
     if (error) {
 
         return res.status(400)
-            .send({ status: false, message: 'Validation error', errors: error.details})
+            .send({ status: false, message: 'Validation error', errors: error.message})
     }
 
     next();

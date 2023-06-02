@@ -5,6 +5,7 @@ import { ApiRouter } from "./routes/routes";
 
 
 app.use(express.json());
+app.use(express.urlencoded())
 app.use(ApiRouter);
 
 export default app;
