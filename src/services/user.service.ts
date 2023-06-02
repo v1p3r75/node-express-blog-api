@@ -9,6 +9,11 @@ class UserService extends BaseService {
         return results
     }
 
+    public async create(data : any) {
+
+        const results = await this.db.user.create({data : data})
+    }
+
 }
 
 export default UserService;

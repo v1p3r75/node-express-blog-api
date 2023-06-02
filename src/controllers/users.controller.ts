@@ -14,9 +14,9 @@ UserController.get('/', async (req: Request, res: Response) => {
 
 UserController.post('/register', async (req: Request, res: Response) => {
 
-    // const result = await user.create(req.body);
+    const result = await model.create(req.body);
 
-    // return res.status(201).json(result);
+    return res.status(201).json(result);
 });
 
 export default UserController;
