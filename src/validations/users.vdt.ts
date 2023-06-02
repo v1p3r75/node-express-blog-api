@@ -7,3 +7,7 @@ export const createUser = Joi.object().keys({
     password: Joi.string().required(),
     admin: Joi.boolean,
 })
+
+export const deleteUser = Joi.object().keys({
+    id: Joi.number().required(),
+})

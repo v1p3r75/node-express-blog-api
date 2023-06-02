@@ -17,6 +17,13 @@ class UserService extends BaseService {
         return results;
     }
 
+    public async delete(id : number) {
+
+        const results = await this.db.user.delete({ where: { id} })
+
+        return results;
+    }
+
 }
 
 export default UserService;
