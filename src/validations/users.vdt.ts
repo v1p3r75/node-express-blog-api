@@ -1,5 +1,6 @@
 import Joi = require("joi");
 
-const create = Joi.object().keys({
-    name: Joi.string()
+export const create = Joi.object().keys({
+    name: Joi.string().required(),
+    phone: Joi.string().required(),
 })

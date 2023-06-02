@@ -1,11 +1,13 @@
 import { Router, Request, Response } from "express";
 import UserService from "../services/user.service";
+import { validate } from "../middlewares/dataValidator";
+import { create } from "../validations/users.vdt";
 
 const UserController = Router();
 
 const model = new UserService();
 
-UserController.get('/', async (req: Request, res: Response) => {
+UserController.get('/', validate(create) , async (req: Request, res: Response) => {
 
     const users = await model.getAll();
 
