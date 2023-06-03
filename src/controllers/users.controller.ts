@@ -15,6 +15,20 @@ UserController.get('/', async (req: Request, res: Response) => {
     return res.status(200).json({status: true, message: 'List of Users', data: users});
 })
 
+UserController.get('/:id', async (req: Request, res: Response) => {
+
+    const { id } = req.params
+
+    const user = await model.getById(Number(id));
+
+    if (!user) {
+
+        return res.status(404).json({status: false, message: 'User Not Found', data: []});
+    }
+
+    return res.status(200).json({status: true, message: 'User Found', data: user});
+})
+
 UserController.post('/register', validate(createUser), async (req: Request, res: Response) => {
 
     const password = await bcrypt.hash(req.body.password, 10);

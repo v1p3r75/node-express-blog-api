@@ -10,6 +10,13 @@ class UserService extends BaseService {
 
     }
 
+    public async getById(id: number) {
+
+        const results = await this.db.user.findFirst({ where : {id}})
+
+        return results;
+    }
+
     public async create(data: any) {
 
         const results = await this.db.user.create({ data })
