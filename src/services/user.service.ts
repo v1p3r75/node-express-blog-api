@@ -12,14 +12,22 @@ class UserService extends BaseService {
 
     public async create(data: any) {
 
-        const results = await this.db.user.create({ data: data })
+        const results = await this.db.user.create({ data })
 
         return results;
     }
 
+    public async update(id : number, data: any) {
+
+        const results = await this.db.user.update({ where: { id }, data})
+
+        return results;
+
+    }
+
     public async delete(id : number) {
 
-        const results = await this.db.user.delete({ where: { id} })
+        const results = await this.db.user.delete({ where: { id } })
 
         return results;
     }

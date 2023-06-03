@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import UserService from "../services/user.service";
 import { validate } from "../middlewares/dataValidator";
-import { createUser, deleteUser } from "../validations/users.vdt";
+import { createUser, deleteUser, updateUser } from "../validations/users.vdt";
 const bcrypt = require('bcrypt');
 
 const UserController = Router();
@@ -25,6 +25,16 @@ UserController.post('/register', validate(createUser), async (req: Request, res:
 
     return res.status(201).json({status: true, message: 'User created succefully', data: result});
 });
+
+UserController.post('/edit', validate(updateUser), async (req: Request, res: Response) => {
+
+    const { id } = req.body
+
+    const result = await model.update(Number(id), req.body);
+
+    return res.status(200).json({status: true, message: 'User updated succefully', data: result});
+});
+
 
 UserController.post('/delete', validate(deleteUser), async (req: Request, res: Response) => {
 
