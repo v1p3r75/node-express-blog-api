@@ -38,7 +38,7 @@ export class ApiResponse {
     static handleResult(res: Response, result: any, successMsg : string, successCode : number = 200) {
 
         if ('error' in result) {
-
+            console.log(result.error)
             return ApiResponse.error(res, sendMessageByEnv(result.error), [], 500)
         }
 
