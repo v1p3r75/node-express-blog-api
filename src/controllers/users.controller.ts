@@ -2,7 +2,8 @@ import { Router, Request, Response } from "express";
 import UserService from "../services/user.service";
 import { validate } from "../middlewares/dataValidator";
 import { createUser, deleteUser, updateUser } from "../validations/users.vdt";
-import { sendMessageByEnv } from "../utils/helper.utils";
+import { ApiResponse, sendMessageByEnv } from "../utils/helper.utils";
+import { User } from "@prisma/client";
 const bcrypt = require('bcrypt');
 
 const UserController = Router();
@@ -13,12 +14,8 @@ UserController.get('/', async (req: Request, res: Response) => {
 
     const users = await model.getAll();
 
-    if ('error' in users) {
+    return ApiResponse.handleResult(res, users, "List Of users");
 
-        return res.status(500).json({status: false, message: sendMessageByEnv(users.error), data: []});
-    }
-
-    return res.status(200).json({status: true, message: 'List of Users', data: users});
 })
 
 UserController.get('/:id', async (req: Request, res: Response) => {
@@ -29,15 +26,10 @@ UserController.get('/:id', async (req: Request, res: Response) => {
 
     if (!user) {
 
-        return res.status(404).json({status: false, message: 'User Not Found', data: []});
+        return ApiResponse.error(res, "User not found", [], 404);
     }
 
-    if ('error' in user) {
-
-        return res.status(500).json({status: false, message: sendMessageByEnv(user.error), data: []});
-    }
-
-    return res.status(200).json({status: true, message: 'User Found', data: user});
+    return ApiResponse.handleResult(res, user, "User found");
 })
 
 UserController.post('/register', validate(createUser), async (req: Request, res: Response) => {
@@ -48,12 +40,7 @@ UserController.post('/register', validate(createUser), async (req: Request, res:
 
     const result = await model.create(data);
 
-    if ('error' in result) {
-
-        return res.status(500).json({status: false, message: sendMessageByEnv(result.error), data: []});
-    }
-
-    return res.status(201).json({status: true, message: 'User created succefully', data: result});
+    return ApiResponse.handleResult(res, result, 'User created succefully', 201)
 });
 
 UserController.patch('/edit', validate(updateUser), async (req: Request, res: Response) => {
@@ -64,12 +51,8 @@ UserController.patch('/edit', validate(updateUser), async (req: Request, res: Re
 
     const result = await model.update(Number(id), req.body);
 
-    if ('error' in result) {
+    return ApiResponse.handleResult(res, result, "User updated successfully");
 
-        return res.status(500).json({status: false, message: sendMessageByEnv(result.error), data: []});
-    }
-
-    return res.status(200).json({status: true, message: 'User updated succefully', data: result});
 });
 
 
@@ -79,12 +62,8 @@ UserController.delete('/delete', validate(deleteUser), async (req: Request, res:
 
     const result = await model.delete(Number(id));
 
-    if ('error' in result) {
+    return ApiResponse.handleResult(res, result, "User deleted successfully");
 
-        return res.status(500).json({status: false, message: sendMessageByEnv(result.error), data: []});
-    }
-
-    return res.status(200).json({status: true, message: 'User deleted succefully', data: result});
 });
 
 export default UserController;
