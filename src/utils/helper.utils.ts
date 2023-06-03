@@ -12,3 +12,12 @@ export const _ = (key: string, defaultValue: string | number = '') => {
     const currentLang = getEnv('APP_LANG', 'fr').toLowerCase() as Lang;
     return lang[currentLang]?.[key] ?? String(defaultValue);
 }
+
+export const sendMessageByEnv = (message : string = '') => {
+
+    if (getEnv('NODE_ENV') === 'development') {
+        return message;
+    }
+
+    return "Internal Server Error";
+}
