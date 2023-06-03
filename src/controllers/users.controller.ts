@@ -40,9 +40,11 @@ UserController.post('/register', validate(createUser), async (req: Request, res:
     return res.status(201).json({status: true, message: 'User created succefully', data: result});
 });
 
-UserController.post('/edit', validate(updateUser), async (req: Request, res: Response) => {
+UserController.patch('/edit', validate(updateUser), async (req: Request, res: Response) => {
 
     const { id } = req.body
+
+    delete req.body.id
 
     const result = await model.update(Number(id), req.body);
 
@@ -50,7 +52,7 @@ UserController.post('/edit', validate(updateUser), async (req: Request, res: Res
 });
 
 
-UserController.post('/delete', validate(deleteUser), async (req: Request, res: Response) => {
+UserController.delete('/delete', validate(deleteUser), async (req: Request, res: Response) => {
 
     const { id } = req.body
 
