@@ -4,11 +4,11 @@ import { ApiResponse} from "../utils/helper.utils";
 import { createPost, deletePost, updatePost } from "../validations/posts.vdt";
 import PostService from "../services/post.service";
 
-const UserController = Router();
+const PostController = Router();
 
 const model = new PostService();
 
-UserController.get('/', async (req: Request, res: Response) => {
+PostController.get('/', async (req: Request, res: Response) => {
 
     const posts = await model.getAll();
 
@@ -16,7 +16,7 @@ UserController.get('/', async (req: Request, res: Response) => {
 
 })
 
-UserController.get('/:id', async (req: Request, res: Response) => {
+PostController.get('/:id', async (req: Request, res: Response) => {
 
     const { id } = req.params
 
@@ -30,14 +30,14 @@ UserController.get('/:id', async (req: Request, res: Response) => {
     return ApiResponse.handleResult(res, user, "Post found");
 })
 
-UserController.post('/create', validate(createPost), async (req: Request, res: Response) => {
+PostController.post('/create', validate(createPost), async (req: Request, res: Response) => {
 
     const result = await model.create(req.body);
 
     return ApiResponse.handleResult(res, result, 'Post created succefully', 201)
 });
 
-UserController.patch('/edit', validate(updatePost), async (req: Request, res: Response) => {
+PostController.patch('/edit', validate(updatePost), async (req: Request, res: Response) => {
 
     const { id } = req.body
 
@@ -50,7 +50,7 @@ UserController.patch('/edit', validate(updatePost), async (req: Request, res: Re
 });
 
 
-UserController.delete('/delete', validate(deletePost), async (req: Request, res: Response) => {
+PostController.delete('/delete', validate(deletePost), async (req: Request, res: Response) => {
 
     const { id } = req.body
 
@@ -60,4 +60,4 @@ UserController.delete('/delete', validate(deletePost), async (req: Request, res:
 
 });
 
-export default UserController;
+export default PostController;

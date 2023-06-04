@@ -4,20 +4,21 @@ import { validate } from "../middlewares/dataValidator";
 import { createUser, deleteUser, updateUser } from "../validations/users.vdt";
 import { ApiResponse } from "../utils/helper.utils";
 import CommentService from "../services/comment.service";
+import { createComment, deleteComment, updateComment } from "../validations/comments.vdt";
 
-const UserController = Router();
+const CommentController = Router();
 
 const model = new CommentService();
 
-UserController.get('/', async (req: Request, res: Response) => {
+CommentController.get('/', async (req: Request, res: Response) => {
 
     const users = await model.getAll();
 
-    return ApiResponse.handleResult(res, users, "List Of users");
+    return ApiResponse.handleResult(res, users, "List Of comments");
 
 })
 
-UserController.get('/:id', async (req: Request, res: Response) => {
+CommentController.get('/:id', async (req: Request, res: Response) => {
 
     const { id } = req.params
 
@@ -25,13 +26,20 @@ UserController.get('/:id', async (req: Request, res: Response) => {
 
     if (!user) {
 
-        return ApiResponse.error(res, "User not found", [], 404);
+        return ApiResponse.error(res, "Comment not found", [], 404);
     }
 
-    return ApiResponse.handleResult(res, user, "User found");
+    return ApiResponse.handleResult(res, user, "Comment found");
 })
 
-UserController.patch('/edit', validate(updateUser), async (req: Request, res: Response) => {
+CommentController.post('/create', validate(createComment), async (req: Request, res: Response) => {
+
+    const result = await model.create(req.body);
+
+    return ApiResponse.handleResult(res, result, 'Comment created succefully', 201)
+});
+
+CommentController.patch('/edit', validate(updateComment), async (req: Request, res: Response) => {
 
     const { id } = req.body
 
@@ -39,19 +47,19 @@ UserController.patch('/edit', validate(updateUser), async (req: Request, res: Re
 
     const result = await model.update(Number(id), req.body);
 
-    return ApiResponse.handleResult(res, result, "User updated successfully");
+    return ApiResponse.handleResult(res, result, "Comment updated successfully");
 
 });
 
 
-UserController.delete('/delete', validate(deleteUser), async (req: Request, res: Response) => {
+CommentController.delete('/delete', validate(deleteComment), async (req: Request, res: Response) => {
 
     const { id } = req.body
 
     const result = await model.delete(Number(id));
 
-    return ApiResponse.handleResult(res, result, "User deleted successfully");
+    return ApiResponse.handleResult(res, result, "Comment deleted successfully");
 
 });
 
-export default UserController;
+export default CommentController;
