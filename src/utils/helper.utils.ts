@@ -1,3 +1,4 @@
+import { isArray } from "util";
 import { lang } from "../lang/index.lang";
 import { Lang } from "../types/generals.type";
 import { Response } from "express";
@@ -25,7 +26,7 @@ export const sendMessageByEnv = (message: string = '') => {
 
 export class ApiResponse {
 
-    static success(res: Response, message: string = 'Request Succeful', data: Array<any> = [], code = 200) {
+    static success(res: Response, message: string = 'Request Succeful', data: Array<any> | any = [], code = 200) {
 
         return res.status(code).json({ status: true, message, data })
     }
@@ -35,9 +36,10 @@ export class ApiResponse {
         return res.status(code).json({ status: false, message, errors })
     }
 
-    static handleResult(res: Response, result: any, successMsg : string, successCode : number = 200) {
+    static handleResult<T extends Result>(res: Response, result: T, successMsg : string, successCode : number = 200) {
 
-        if ('error' in result) {
+        if ('error' in error) {
+
             console.log(result.error)
             return ApiResponse.error(res, sendMessageByEnv(result.error), [], 500)
         }

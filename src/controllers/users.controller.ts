@@ -49,7 +49,7 @@ UserController.patch('/edit', validate(updateUser), async (req: Request, res: Re
 
     delete req.body.id
 
-    const result = await model.update(Number(id), req.body);
+    const result = await model.update(+id, req.body);
 
     return ApiResponse.handleResult(res, result, "User updated successfully");
 
@@ -60,7 +60,7 @@ UserController.delete('/delete', validate(deleteUser), async (req: Request, res:
 
     const { id } = req.body
 
-    const result = await model.delete(Number(id));
+    const result = await model.delete(+id);
 
     return ApiResponse.handleResult(res, result, "User deleted successfully");
 

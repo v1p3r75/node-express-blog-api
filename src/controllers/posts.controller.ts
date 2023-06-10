@@ -20,14 +20,14 @@ PostController.get('/:id', async (req: Request, res: Response) => {
 
     const { id } = req.params
 
-    const user = await model.getById(Number(id));
+    const post = await model.getById(Number(id));
 
-    if (!user) {
+    if (!post) {
 
         return ApiResponse.error(res, "Post not found", [], 404);
     }
 
-    return ApiResponse.handleResult(res, user, "Post found");
+    return ApiResponse.handleResult(res, post, "Post found");
 })
 
 PostController.post('/create', validate(createPost), async (req: Request, res: Response) => {

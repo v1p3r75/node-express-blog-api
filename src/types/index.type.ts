@@ -1,5 +1,2 @@
 
-interface Result<T> {
-
-    T : any | { message : string}
-} 
+type Result = any[] | any | { error : string}
