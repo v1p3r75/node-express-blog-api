@@ -2,8 +2,7 @@ import { Router, Request, Response } from "express";
 import UserService from "../services/user.service";
 import { validate } from "../middlewares/dataValidator";
 import { createUser, deleteUser, updateUser } from "../validations/users.vdt";
-import { ApiResponse, sendMessageByEnv } from "../utils/helper.utils";
-import { User } from "@prisma/client";
+import { ApiResponse } from "../utils/helper.utils";
 const bcrypt = require('bcrypt');
 
 const UserController = Router();
