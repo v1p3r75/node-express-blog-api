@@ -1,2 +1,6 @@
+import { Request, Response } from "express"
 
-type Result = any[] | any | { error : string}
+export type Result = Object[] | Object | { error: string }
+
+export type IController = (req : Request, res : Response) => any
+

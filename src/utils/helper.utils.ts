@@ -1,7 +1,7 @@
-import { isArray } from "util";
 import { lang } from "../lang/index.lang";
 import { Lang } from "../types/generals.type";
 import { Response } from "express";
+import { Result } from "../types/index.type";
 
 
 export const getEnv = (key: string, defaultValue: string | number = '') => {
@@ -38,7 +38,7 @@ export class ApiResponse {
 
     static handleResult<T extends Result>(res: Response, result: T, successMsg : string, successCode : number = 200) {
 
-        if ('error' in error) {
+        if ('error' in result) {
 
             console.log(result.error)
             return ApiResponse.error(res, sendMessageByEnv(result.error), [], 500)
