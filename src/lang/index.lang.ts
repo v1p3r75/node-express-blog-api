@@ -1,6 +1,6 @@
 import { LangType } from "../types/generals.type";
 
-export const lang : LangType= {
+export const lang : LangType = {
     
     fr : {
 
