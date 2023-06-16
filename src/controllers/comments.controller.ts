@@ -1,7 +1,5 @@
 import { Router, Request, Response } from "express";
-import UserService from "../services/user.service";
 import { validate } from "../middlewares/dataValidator";
-import { createUser, deleteUser, updateUser } from "../validations/users.vdt";
 import { ApiResponse } from "../utils/helper.utils";
 import CommentService from "../services/comment.service";
 import { createComment, deleteComment, updateComment } from "../validations/comments.vdt";
