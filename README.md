@@ -1,6 +1,6 @@
 # BLOG API REST WITH NODEJS EXPRESS
 
-Un api pour la gestion des blogs et des utilisateurs écrit avec NodeJS (Express)
+Un api pour la gestion des blogs et des utilisateurs écrit avec NodeJS (Express, ORM)
 
 ## Scripts disponibles
 Dans ce projet, vous pouvez utiliser les scripts suivants :
